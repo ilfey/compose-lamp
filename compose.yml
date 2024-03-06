@@ -2,6 +2,10 @@ version: "3"
 
 services:
     db:
+        container_name: lamp-database
+
+        restart: always
+    
         image: mysql
 
         # ports: 
@@ -18,24 +22,30 @@ services:
             - .db/dump:/docker-entrypoint-initdb.d
             - .db/conf:/etc/mysql/conf.d
             - .db/data:/var/lib/mysql
-        
-        networks:
-            - default
 
     www:
+        container_name: lamp-php
+
+        restart: always
+        
         build: .
+        
         ports: 
             - "8888:80"
+            
         volumes:
             - "./entrypoint.sh:/entrypoint.sh"
             - "./www:/var/www/"
             - "./sites-available/:/etc/apache2/sites-available/"
+            
         links:
             - db
-        networks:
-            - default
 
     phpmyadmin:
+        container_name: lamp-phpmyadmin
+
+        restart: always
+    
         image: phpmyadmin/phpmyadmin
 
         links: 
