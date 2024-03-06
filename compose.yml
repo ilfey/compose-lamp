@@ -2,7 +2,7 @@ version: "3"
 
 services:
     db:
-        container_name: lamp-database
+        container_name: "lamp-${PROJECT_NAME}-database"
 
         restart: always
     
@@ -24,7 +24,7 @@ services:
             - .db/data:/var/lib/mysql
 
     www:
-        container_name: lamp-php
+        container_name: "lamp-${PROJECT_NAME}-php"
 
         restart: always
         
@@ -34,7 +34,6 @@ services:
             - "8888:80"
             
         volumes:
-            - "./entrypoint.sh:/entrypoint.sh"
             - "./www:/var/www/"
             - "./sites-available/:/etc/apache2/sites-available/"
             
@@ -42,7 +41,7 @@ services:
             - db
 
     phpmyadmin:
-        container_name: lamp-phpmyadmin
+        container_name: "lamp-${PROJECT_NAME}-phpmyadmin"
 
         restart: always
     

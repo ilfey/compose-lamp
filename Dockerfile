@@ -5,7 +5,7 @@ WORKDIR /var/www
 RUN apt-get update \
     && apt-get install -y dos2unix
 
-COPY ./entrypoint.sh /
+COPY entrypoint.sh /
 
 RUN dos2unix /entrypoint.sh
 
