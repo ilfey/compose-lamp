@@ -11,6 +11,8 @@ RUN dos2unix /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
 
+COPY apache2.conf /etc/apache2
+
 COPY www/ .
 
 RUN docker-php-ext-install mysqli
